@@ -2,7 +2,7 @@ require 'api_version_constraint'
 
 # TODO add host api.rails-api-sketch.dev to 127.0.1.1 on the OS on which server was deployed 
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api, defaults: { format: :json }, constraints: { subdomain: 'api' }, path: '/' do
