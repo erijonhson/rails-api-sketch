@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
     begin
       user = User.new(user_params)
       if user.save
-        render json: user, status: 201
+        render json: user, status: 201 # created
       else
         render json: { erros: user.errors }, status: 422 # unprocessable entity
       end
@@ -23,6 +23,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update
+    begin
+      user = User.find(params[:id])
+      if user.update(user_params)
+        render json: user, status: 200 # success
+      else
+        render json: { erros: user.errors }, status: 422 # unprocessable entity
+      end
+    rescue
+      head 409 # conflict
+    end
+  end
+  
   private
 
   def user_params 
