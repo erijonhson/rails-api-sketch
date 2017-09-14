@@ -3,10 +3,29 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     begin
-      @user = User.find(params[:id])
-      respond_with @user
+      user = User.find(params[:id])
+      respond_with user
     rescue
-      head 404
+      head 404 # not found
     end
+  end
+
+  def create
+    begin
+      user = User.new(user_params)
+      if user.save
+        render json: user, status: 201
+      else
+        render json: { erros: user.errors }, status: 422 # unprocessable entity
+      end
+    rescue
+      head 409 # conflict
+    end
+  end
+
+  private
+
+  def user_params 
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end
