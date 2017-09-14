@@ -19,7 +19,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'return status 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_id) { 999 }
 
       it 'return status 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_params) { attributes_for(:user, email: 'invalidatemail.com') }
 
       it 'return status 422' do
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'return json data for the errors' do
@@ -75,7 +75,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_params) { { email: 'new-rails-api-skecth@email.com' } }
 
       it 'return status 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'return json data for the updated user' do
@@ -88,7 +88,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_params) { attributes_for(:user, email: 'invalidatemail.com') }
 
       it 'return status 422' do
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'return json data for the errors' do
@@ -105,7 +105,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     it 'return status 204' do
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
 
     it 'removes the user from database' do
@@ -116,7 +116,7 @@ RSpec.describe 'Users API', type: :request do
       let(:user_id) { 999 }
 
       it 'return status 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

@@ -6,20 +6,16 @@ class Api::V1::UsersController < ApplicationController
       user = User.find(params[:id])
       respond_with user
     rescue
-      head 404 # not found
+      head :not_found 
     end
   end
 
   def create
-    begin
-      user = User.new(user_params)
-      if user.save
-        render json: user, status: 201 # created
-      else
-        render json: { erros: user.errors }, status: 422 # unprocessable entity
-      end
-    rescue
-      head 409 # conflict
+    user = User.new(user_params)
+    if user.save
+      render json: user, status: :created
+    else
+      render json: { erros: user.errors }, status: :unprocessable_entity
     end
   end
 
@@ -27,12 +23,12 @@ class Api::V1::UsersController < ApplicationController
     begin
       user = User.find(params[:id])
       if user.update(user_params)
-        render json: user, status: 200 # success
+        render json: user, status: :ok
       else
-        render json: { erros: user.errors }, status: 422 # unprocessable entity
+        render json: { erros: user.errors }, status: :unprocessable_entity
       end
     rescue
-      head 409 # conflict
+      head :not_found
     end
   end
 
@@ -40,9 +36,9 @@ class Api::V1::UsersController < ApplicationController
     begin
       user = User.find(params[:id])
       user.destroy
-      head 204 # success
+      head :no_content
     rescue
-      head 404 # not found
+      head :not_found
     end
   end
 
