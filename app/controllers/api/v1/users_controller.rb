@@ -35,7 +35,17 @@ class Api::V1::UsersController < ApplicationController
       head 409 # conflict
     end
   end
-  
+
+  def destroy
+    begin
+      user = User.find(params[:id])
+      user.destroy
+      head 204 # success
+    rescue
+      head 404 # not found
+    end
+  end
+
   private
 
   def user_params 
