@@ -47,3 +47,9 @@ bower.json
 .byebug_history
 
 # End of https://www.gitignore.io/api/rails
+
+### RubyMine ###
+.idea/
+
+### Vagrant ###
+ubuntu-xenial-16.04-cloudimg-console.log
