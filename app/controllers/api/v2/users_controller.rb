@@ -6,7 +6,7 @@ class Api::V2::UsersController < ApplicationController
   def show
     begin
       user = User.find(params[:id])
-      respond_with user
+      render json: user, status: :ok
     rescue
       head :not_found 
     end
