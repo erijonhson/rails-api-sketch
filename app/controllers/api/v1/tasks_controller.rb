@@ -29,6 +29,15 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def destroy
+    task = current_user.tasks.find(params[:id])
+    if task.destroy
+      head :no_content
+    else
+      head :not_found
+    end
+  end
+
   private
 
   def task_params

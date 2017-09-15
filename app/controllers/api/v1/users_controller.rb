@@ -31,8 +31,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    current_user.destroy
-    head :no_content
+    if current_user.destroy
+      head :no_content
+    else
+      head :not_found
+    end
   end
 
   private
