@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1, default: true) do
       resources :users, only: [:show, :create, :update, :destroy] # api.rails-api-sketch.dev/users
       resources :sessions, only: [:create, :destroy]
-      resources :tasks, only: [:index, :show, :create]
+      resources :tasks, only: [:index, :show, :create, :update]
     end
 
     # TODO create folder api/v2 for other api version
