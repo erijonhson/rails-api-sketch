@@ -5,7 +5,7 @@ RSpec.describe 'Users API', type: :request do
   let(:user_id) { user.id }
   let(:headers) do
     {
-      'Accept' => 'application/vnd.rails-api-skecth.v1',
+      'Accept' => 'application/vnd.rails-api-sketch.v1',
       'Content-Type' => Mime[:json].to_s,
       'Authorization' => user.auth_token
     }

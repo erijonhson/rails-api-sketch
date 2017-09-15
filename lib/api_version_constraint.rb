@@ -6,6 +6,6 @@ class ApiVersionConstraint
 	end
 
 	def matches?(req)
-		@default || req.headers['Accept'].include?('application/vnd.rails-api-sketch.v#{@version}')
+		@default || req.headers['Accept'].include?("application/vnd.rails-api-sketch.v#{@version}")
 	end
 end

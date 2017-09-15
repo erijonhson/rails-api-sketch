@@ -6,7 +6,7 @@ RSpec.describe 'Task API' do
   let!(:user) { create(:user) }
   let(:headers) do
     {
-        'Accept' => 'application/vnd.rails-api-skecth.v1',
+        'Accept' => 'application/vnd.rails-api-sketch.v1',
         'Content-Type' => Mime[:json].to_s,
         'Authorization' => user.auth_token
     }

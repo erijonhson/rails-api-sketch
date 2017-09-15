@@ -49,4 +49,5 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise'
+gem 'devise' # https://github.com/plataformatec/devise
+gem 'active_model_serializers', '~> 0.10.0' # https://github.com/rails-api/active_model_serializers/tree/0-10-stable
