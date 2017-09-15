@@ -52,3 +52,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise' # https://github.com/plataformatec/devise
 gem 'active_model_serializers', '~> 0.10.0' # https://github.com/rails-api/active_model_serializers/tree/0-10-stable
 gem 'ransack' # https://github.com/activerecord-hackery/ransack
+gem 'omniauth' # https://github.com/omniauth/omniauth
+gem 'devise_token_auth' # https://github.com/lynndylanhurley/devise_token_auth

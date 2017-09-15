@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
 
     namespace :v2, path: '/', constraints: ApiVersionConstraint.new(version: 2, default: true) do
+      mount_devise_token_auth_for 'User', at: 'auth'
       resources :users, only: [:show, :create, :update, :destroy] # api.rails-api-sketch.dev/users
       resources :sessions, only: [:create, :destroy]
       resources :tasks, only: [:index, :show, :create, :update, :destroy]
