@@ -6,7 +6,8 @@ RSpec.describe 'Users API', type: :request do
   let(:headers) do
     {
       'Accept' => 'application/vnd.rails-api-skecth.v1',
-      'Content-Type' => Mime[:json].to_s
+      'Content-Type' => Mime[:json].to_s,
+      'Authorization' => user.auth_token
     }
   end
 
@@ -107,14 +108,6 @@ RSpec.describe 'Users API', type: :request do
 
     it 'removes the user from database' do
       expect( User.find_by(id: :user_id) ).to be_nil
-    end
-
-    context 'when the user doesn\'t exists' do
-      let(:user_id) { 999 }
-
-      it 'return status 404' do
-        expect(response).to have_http_status(:not_found)
-      end
     end
   end
 end
