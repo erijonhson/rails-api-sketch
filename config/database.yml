@@ -22,7 +22,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # username: postgres
   # password: '...'
-  # host: localhost # do not need swap pg_hba.conf
+  # host: localhost  # do not need swap pg_hba.conf
 
 development:
   <<: *default
