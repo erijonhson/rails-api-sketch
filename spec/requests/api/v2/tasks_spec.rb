@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Task API' do
-  before { host! 'api.rails-api-sketch.dev' }
 
   let!(:user) { create(:user) }
   let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
-        'Accept' => 'application/vnd.rails-api-sketch.v2',
         'Content-Type' => Mime[:json].to_s,
         'access-token' => auth_data['access-token'],
         'uid' => auth_data['uid'],
@@ -15,11 +13,11 @@ RSpec.describe 'Task API' do
     }
   end
 
-  describe 'GET /tasks' do
+  describe 'GET /api/v2/tasks' do
     context 'when no filter param is sent' do
       before do
         create_list(:task, 5, user_id: user.id)
-        get '/tasks', params: {}, headers: headers
+        get '/api/v2/tasks', params: {}, headers: headers
       end
 
       it 'returns status code 200' do
@@ -38,7 +36,7 @@ RSpec.describe 'Task API' do
       let!(:other_task_2) { create(:task, title: 'Buy a new car', user_id: user.id) }
 
       before do
-        get '/tasks?q[title_cont]=note&q[s]=title+ASC', params: {}, headers: headers
+        get '/api/v2/tasks?q[title_cont]=note&q[s]=title+ASC', params: {}, headers: headers
       end
 
       it 'returns only the tasks matching' do
@@ -49,10 +47,10 @@ RSpec.describe 'Task API' do
     end
   end
 
-  describe 'GET /tasks/:id' do
+  describe 'GET /api/v2/tasks/:id' do
     let(:task) { create(:task, user_id: user.id) }
 
-    before { get "/tasks/#{task.id}", params: {}, headers: headers }
+    before { get "/api/v2/tasks/#{task.id}", params: {}, headers: headers }
 
     it 'returns status code 200' do
       expect(response).to have_http_status(:ok)
@@ -63,11 +61,11 @@ RSpec.describe 'Task API' do
     end
   end
 
-  describe 'POST /tasks' do
+  describe 'POST /api/v2/tasks' do
     let(:task_params) { attributes_for(:task) }
 
     before do
-      post '/tasks/', params: { task: task_params }.to_json, headers: headers
+      post '/api/v2/tasks/', params: { task: task_params }.to_json, headers: headers
     end
 
     context 'when the params are valid' do
@@ -106,11 +104,11 @@ RSpec.describe 'Task API' do
     end
   end
 
-  describe 'PUT /tasks/:id' do
+  describe 'PUT /api/v2/tasks/:id' do
     let(:task) { create(:task, user_id: user.id) }
 
     before do
-      put "/tasks/#{task.id}", params: { task: task_params }.to_json, headers: headers
+      put "/api/v2/tasks/#{task.id}", params: { task: task_params }.to_json, headers: headers
     end
 
     context 'when the params are valid' do
@@ -146,11 +144,11 @@ RSpec.describe 'Task API' do
     end
   end
 
-  describe 'DELETE /tasks/:id' do
+  describe 'DELETE /api/v2/tasks/:id' do
     let(:task) { create(:task, user_id: user.id) }
 
     before do
-      delete "/tasks/#{task.id}", params: {}, headers: headers
+      delete "/api/v2/tasks/#{task.id}", params: {}, headers: headers
     end
 
     it 'returns status code 204' do

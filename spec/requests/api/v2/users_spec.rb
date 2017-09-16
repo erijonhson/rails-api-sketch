@@ -5,7 +5,6 @@ RSpec.describe 'Users API', type: :request do
   let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
-      'Accept' => 'application/vnd.rails-api-sketch.v2',
       'Content-Type' => Mime[:json].to_s,
       'access-token' => auth_data['access-token'],
       'uid' => auth_data['uid'],
@@ -13,13 +12,11 @@ RSpec.describe 'Users API', type: :request do
     }
   end
 
-  before { host! 'api.rails-api-sketch.dev' }
-
-  describe 'GET /auth/validate_token' do
+  describe 'GET /api/v2/auth/validate_token' do
 
     context 'when the request headers are valid' do
       before do
-        get '/auth/validate_token', params: {}, headers: headers
+        get '/api/v2/auth/validate_token', params: {}, headers: headers
       end
 
       it 'returns the user id' do
@@ -34,7 +31,7 @@ RSpec.describe 'Users API', type: :request do
     context 'when the request headers are invalid' do
       before do
         headers['access-token'] = 'invalide'
-        get '/auth/validate_token', params: {}, headers: headers
+        get '/api/v2/auth/validate_token', params: {}, headers: headers
       end
 
       it 'return status 401' do
@@ -43,9 +40,9 @@ RSpec.describe 'Users API', type: :request do
     end
   end
 
-  describe 'POST /auth' do
+  describe 'POST /api/v2/auth' do
     before do
-      post '/auth', params: user_params.to_json, headers: headers
+      post '/api/v2/auth', params: user_params.to_json, headers: headers
     end
 
     context 'when the request params are valid' do
@@ -73,9 +70,9 @@ RSpec.describe 'Users API', type: :request do
     end
   end
 
-  describe 'PUT /auth' do
+  describe 'PUT /api/v2/auth' do
     before do
-      put '/auth', params: user_params.to_json, headers: headers
+      put '/api/v2/auth', params: user_params.to_json, headers: headers
     end
 
     context 'when the request params are valid' do
@@ -103,9 +100,9 @@ RSpec.describe 'Users API', type: :request do
     end
   end
 
-  describe 'DELETE /auth' do
+  describe 'DELETE /api/v2/auth' do
     before do
-      delete '/auth', params: {}, headers: headers
+      delete '/api/v2/auth', params: {}, headers: headers
     end
 
     it 'return status 200' do

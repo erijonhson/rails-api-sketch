@@ -4,16 +4,13 @@ RSpec.describe 'Sessions API', type: :request do
   let(:user) { create(:user) }
   let(:headers) do
     {
-      'Accept' => 'application/vnd.rails-api-sketch.v1',
       'Content-Type' => Mime[:json].to_s
     }
   end
 
-  before { host! 'api.rails-api-sketch.dev' }
-
-  describe 'POST /sessions' do
+  describe 'POST /api/v1/sessions' do
     before do
-      post '/sessions', params: { session: credentials }.to_json, headers: headers
+      post '/api/v1/sessions', params: { session: credentials }.to_json, headers: headers
     end
 
     context 'when the credentials are correct' do
@@ -42,11 +39,11 @@ RSpec.describe 'Sessions API', type: :request do
     end
   end
 
-  describe 'DELETE /sessions' do
+  describe 'DELETE /api/v1/sessions' do
     let(:auth_token) { user.auth_token }
 
     before do
-      delete "/sessions/#{auth_token}", params: {}, headers: headers
+      delete "/api/v1/sessions/#{auth_token}", params: {}, headers: headers
     end
 
     it 'returns status code 204' do

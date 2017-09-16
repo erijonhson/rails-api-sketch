@@ -5,7 +5,6 @@ RSpec.describe 'Sessions API', type: :request do
   let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
-        'Accept' => 'application/vnd.rails-api-sketch.v2',
         'Content-Type' => Mime[:json].to_s,
         'access-token' => auth_data['access-token'],
         'uid' => auth_data['uid'],
@@ -13,11 +12,9 @@ RSpec.describe 'Sessions API', type: :request do
     }
   end
 
-  before { host! 'api.rails-api-sketch.dev' }
-
-  describe 'POST /auth/sign_in' do
+  describe 'POST /api/v2/auth/sign_in' do
     before do
-      post '/auth/sign_in', params: credentials.to_json, headers: headers
+      post '/api/v2/auth/sign_in', params: credentials.to_json, headers: headers
     end
 
     context 'when the credentials are correct' do
@@ -47,11 +44,11 @@ RSpec.describe 'Sessions API', type: :request do
     end
   end
 
-  describe 'DELETE /auth/sign_out' do
+  describe 'DELETE /api/v2/auth/sign_out' do
     let(:auth_token) { user.auth_token }
 
     before do
-      delete '/auth/sign_out', params: {}, headers: headers
+      delete '/api/v2/auth/sign_out', params: {}, headers: headers
     end
 
     it 'returns status code 200' do
