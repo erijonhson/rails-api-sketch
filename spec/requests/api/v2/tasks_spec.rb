@@ -4,11 +4,14 @@ RSpec.describe 'Task API' do
   before { host! 'api.rails-api-sketch.dev' }
 
   let!(:user) { create(:user) }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
         'Accept' => 'application/vnd.rails-api-sketch.v2',
         'Content-Type' => Mime[:json].to_s,
-        'Authorization' => user.auth_token
+        'access-token' => auth_data['access-token'],
+        'uid' => auth_data['uid'],
+        'client' => auth_data['client']
     }
   end
 

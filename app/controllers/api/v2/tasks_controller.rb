@@ -1,18 +1,18 @@
 class Api::V2::TasksController < Api::V2::BaseController
-  before_action :authenticate_with_token!
+  before_action :authenticate_api_v2_user!
 
   def index
-    tasks = current_user.tasks.ransack(params[:q]).result
+    tasks = current_api_v2_user.tasks.ransack(params[:q]).result
     render json: tasks, status: :ok
   end
 
   def show
-    task = current_user.tasks.find(params[:id])
+    task = current_api_v2_user.tasks.find(params[:id])
     render json: task, status: :ok
   end
 
   def create
-    task = current_user.tasks.build(task_params)
+    task = current_api_v2_user.tasks.build(task_params)
     if task.save
       render json: task, status: :created
     else
@@ -21,7 +21,7 @@ class Api::V2::TasksController < Api::V2::BaseController
   end
 
   def update
-    task = current_user.tasks.find(params[:id])
+    task = current_api_v2_user.tasks.find(params[:id])
     if task.update_attributes(task_params)
       render json: task, status: :ok
     else
@@ -30,7 +30,7 @@ class Api::V2::TasksController < Api::V2::BaseController
   end
 
   def destroy
-    task = current_user.tasks.find(params[:id])
+    task = current_api_v2_user.tasks.find(params[:id])
     if task.destroy
       head :no_content
     else
