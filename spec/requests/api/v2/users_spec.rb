@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
   let!(:user) { create(:user) }
-  let(:auth_data) { user.create_new_auth_token }
+  let!(:auth_data) { user.create_new_auth_token }
   let(:headers) do
     {
       'Accept' => 'application/vnd.rails-api-sketch.v2',
