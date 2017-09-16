@@ -11,7 +11,7 @@ RSpec.describe 'Users API', type: :request do
     }
   end
 
-  before { host! 'api.rails-api-skecth.dev' }
+  before { host! 'api.rails-api-sketch.dev' }
 
   describe 'GET /users/:id' do
     before do
@@ -62,7 +62,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'return json data for the errors' do
-        expect(json_body).to have_key(:erros)
+        expect(json_body).to have_key(:errors)
       end
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'return json data for the errors' do
-        expect(json_body).to have_key(:erros)
+        expect(json_body).to have_key(:errors)
       end
     end
   end
