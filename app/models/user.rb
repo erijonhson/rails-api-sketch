@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   include DeviseTokenAuth::Concerns::User
-  
+
   validates_uniqueness_of :auth_token
   before_create :generate_authentication_token!
 

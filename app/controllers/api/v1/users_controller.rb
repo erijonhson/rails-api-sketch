@@ -1,10 +1,12 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
   before_action :authenticate_with_token!, only: [:update, :destroy]
+  wrap_parameters :user, include: [:name, :email, :password, :password_confirmation]
   respond_to :json
 
   def show
     begin
+      byebug
       user = User.find(params[:id])
       respond_with user
     rescue
@@ -41,6 +43,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   private
 
   def user_params 
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
 end
