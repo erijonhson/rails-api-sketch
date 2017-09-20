@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
-  before_action :authenticate_with_token!, only: [:update, :destroy]
+  before_action :authenticate_with_token!, only: [:show, :update, :destroy]
   wrap_parameters :user, include: [:name, :email, :password, :password_confirmation]
   respond_to :json
 
